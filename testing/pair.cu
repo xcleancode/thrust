@@ -289,3 +289,16 @@ void TestPairSwap(void)
 }
 DECLARE_UNITTEST(TestPairSwap);
 
+#if THRUST_CPP_DIALECT >= 2017
+void TestPairStructuredBindings(void)
+{
+  const int a = 42;
+  const int b = 1337;
+  thrust::pair<int,int> p(a,b);
+  
+  [a2, b2] = p;
+  ASSERT_EQUAL(a, a2);
+  ASSERT_EQUAL(b, b2);
+}
+DECLARE_UNITTEST(TestPairStructuredBindings);
+#endif
